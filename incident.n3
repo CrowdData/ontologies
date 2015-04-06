@@ -1,0 +1,144 @@
+@prefix : <http://crowddata.abdn.ac.uk/def/incidents/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology ;
+    owl:imports <http://purl.org/NET/c4dm/event.owl>,
+        <http://rdfs.org/sioc/ns#>,
+        <http://xmlns.com/foaf/0.1/> .
+
+:Active a :IncidentStatus,
+        owl:NamedIndividual ;
+		rdfs:label "Active"^^xsd:string .
+
+:BuildingWorks a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Building Works"^^xsd:string .
+
+:FraudstersInArea a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Fraudsters in Area"^^xsd:string .
+
+:Future a :IncidentStatus,
+        owl:NamedIndividual ;
+		rdfs:label "Future"^^xsd:string .
+
+:GateClosed a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Gate Closed"^^xsd:string .
+
+:InternetOutage a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Internet Outage"^^xsd:string .
+
+:LeopardSighting a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Leopard Sighting"^^xsd:string .
+
+:ParkingRestriction a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Parking Restriction"^^xsd:string .
+
+:Past a :IncidentStatus,
+        owl:NamedIndividual ;
+		rdfs:label "Past"^^xsd:string .
+
+:PowerOutage a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Power Outage"^^xsd:string .
+
+:Report a owl:Class ;
+    rdfs:label "Report"^^xsd:string ;
+    rdfs:comment "A report of an Incident"^^xsd:string ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:dateTime ;
+            owl:onProperty <http://rdfs.org/sioc/ns#created_at> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :Incident ;
+            owl:onProperty <http://xmlns.com/foaf/0.1/primaryTopic> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass <http://xmlns.com/foaf/0.1/Agent> ;
+            owl:onProperty <http://xmlns.com/foaf/0.1/maker> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        <http://rdfs.org/sioc/ns#Post> .
+
+:RoadClosed a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Road Closed"^^xsd:string .
+
+:TrafficDiversion a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Traffic Diversion"^^xsd:string .
+
+:UnattendedBicycles a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Unattended Bicycles"^^xsd:string .
+
+:UnauthorisedCarParking a :IncidentType,
+        owl:NamedIndividual ;
+    rdfs:label "Unauthorised Car Parking"^^xsd:string .
+
+:Unknown a :IncidentStatus,
+        owl:NamedIndividual ;
+		rdfs:label "Unknown"^^xsd:string .
+
+:relatedIncidents a owl:ObjectProperty ;
+    rdfs:label "related incidents"^^xsd:string ;
+    rdfs:comment "References to any incidents that are causing, caused by, or otherwise related to this incident."^^xsd:string .
+
+<http://purl.org/dc/terms/Location> a owl:Class .
+
+:Incident a owl:Class ;
+    rdfs:label "Incident"^^xsd:string ;
+    rdfs:comment "An event or set of circumstances that has an impact on the smart district.  For example, this could be roadworks, a panther sighting, road closure"^^xsd:string ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :IncidentType ;
+            owl:onProperty :incidentType ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onClass :IncidentStatus ;
+            owl:onProperty :hasStatus ],
+        [ a owl:Restriction ;
+            owl:onClass <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> ;
+            owl:onProperty <http://purl.org/NET/c4dm/event.owl#place> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass <http://purl.org/NET/c4dm/timeline.owl#Interval> ;
+            owl:onProperty <http://purl.org/NET/c4dm/event.owl#time> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] .
+
+:email a owl:DatatypeProperty ;
+    rdfs:comment "The email address associated with the Agent that provided a report" .
+
+:hasStatus a owl:ObjectProperty ;
+    rdfs:label "has status"^^xsd:string .
+
+:incidentType a owl:ObjectProperty ;
+    rdfs:label "incident type" ;
+    rdfs:comment """The type of an incident
+.""".
+
+<http://purl.org/NET/c4dm/timeline.owl#Interval> a owl:Class .
+
+<http://xmlns.com/foaf/0.1/Agent> rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty :email ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty <http://xmlns.com/foaf/0.1/name> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] .
+
+:IncidentStatus a owl:Class ;
+    rdfs:label "incident status"^^xsd:string ;
+    rdfs:comment "The current (or latest) known status of the incident."^^xsd:string .
+
+:IncidentType a owl:Class ;
+    rdfs:label "Incident Type"^^xsd:string ;
+    rdfs:comment "An enumeration of the different types of incidents encountered in a given smart district."^^xsd:string .

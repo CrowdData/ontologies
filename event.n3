@@ -1,0 +1,211 @@
+@prefix : <http://crowddata.abdn.ac.uk/def/events/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+: a owl:Ontology ;
+    owl:imports <http://purl.org/NET/c4dm/event.owl>,
+        <http://rdfs.org/sioc/ns#>,
+        <http://xmlns.com/foaf/0.1/> .
+
+
+:IITBEvent a owl:Class;
+    rdfs:label "Report"^^xsd:string ;
+    rdfs:comment "A report of an Incident"^^xsd:string ;
+    rdfs:subClassOf event:Event;
+    rdfs:subClassOf
+        [ a owl:Restriction ;
+            owl:onClass <http://purl.org/NET/c4dm/timeline.owl#Interval> ;
+            owl:onProperty <http://purl.org/NET/c4dm/event.owl#time> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> ;
+            owl:onProperty <http://purl.org/NET/c4dm/event.owl#place> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EventType ;
+            owl:onProperty :eventType ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty dcterms:title ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+     
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty dcterms:description ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+       
+            .
+        
+        
+        
+:more_info a owl:DatatypeProperty;
+	rdfs:label "Link to more information, registrations updates" .
+	
+	
+:hasTag a owl:DatatypeProperty ;
+    rdfs:domain IITBEvent;
+    rdfs:range xsd:string;
+    rdfs:comment "Additional Tag/Topic to describe event."^^xsd:string ;
+    rdfs:label "Additional Tag/Topic to describe event."^^xsd:string  .
+    
+:department a owl:ObjectProperty;
+rdfs:domain :IITBEvent;
+rdfs:range :Department;
+rdfs:comment "associated department with particular event"^^xsd:string .
+
+:eventType a owl:ObjectProperty ;
+rdfs:domain :IITBEvent;
+rdfs:range :EventType;
+rdfs:label "Event Type"^^xsd:string ;
+rdfs:comment "Type of event" .
+
+
+
+:EventType a owl:Class ;
+    rdfs:label "Event Type"^^xsd:string ;
+    rdfs:comment "An enumeration of the different types of events encountered in a given smart district."^^xsd:string .
+    
+:Department a owl:Class ;
+    rdfs:label "IITB Department"^^xsd:string ;
+    rdfs:comment "An enumeration of the different types of departments located on IITB Campus"^^xsd:string .
+
+#Department individuals
+
+ :IT_-_Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "IT - Related"^^xsd:string .
+ :SOM_-_Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "SOM - Related"^^xsd:string .
+ :Aerospace_Engineering_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Aerospace Engineering Dept. Related"^^xsd:string .
+ :Biosciences_and_Bioengineering_Dept._ a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Biosciences and Bioengineering Dept. "^^xsd:string .
+ :Chemical_Engineering_Dept._Related" a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Chemical Engineering Dept. Related""^^xsd:string .
+ :Civil_Engineering_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Civil Engineering Dept. Related"^^xsd:string .
+ :Computer_Science_and_Engineering_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Computer Science and Engineering Dept. Related"^^xsd:string .
+ :Chemistry_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Chemistry Dept. Related"^^xsd:string .
+ :Earth_Science_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Earth Science Dept. Related"^^xsd:string .
+ :Electrical_Engineering_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Electrical Engineering Dept. Related"^^xsd:string .
+ :Energy_Science_and_Engineering_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Energy Science and Engineering Dept. Related"^^xsd:string .
+ :Humanities_and_Social_Science_Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Humanities and Social Science Related"^^xsd:string .
+ :Industrial_Design_Center_Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Industrial Design Center Related"^^xsd:string .
+ :Mathematics_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Mathematics Dept. Related"^^xsd:string .
+ :Mechanical_Engineering_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Mechanical Engineering Dept. Related"^^xsd:string .
+ :Mettalurgical_Engineering_and_Material_Science_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Mettalurgical Engineering and Material Science Dept. Related"^^xsd:string .
+ :Physics_Dept._Related a :Department,
+        owl:NamedIndividual ;
+		rdfs:label "Physics Dept. Related"^^xsd:string .
+		
+#EventTypes
+
+:Screening_Film a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Screening Film"^^xsd:string .
+ :Screening_Sport_Finals a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Screening Sport Finals"^^xsd:string .
+ :Musical_Performance a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Musical Performance"^^xsd:string .
+ :Dance_Performance a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Dance Performance"^^xsd:string .
+ :Theatrical_Performance a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Theatrical Performance"^^xsd:string .
+ :Gaming a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Gaming"^^xsd:string .
+ :Sport a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Sport"^^xsd:string .
+ :Exhibition a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Exhibition"^^xsd:string .
+ :Talk a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Talk"^^xsd:string .
+ :Festival a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Festival"^^xsd:string .
+ :Workshop a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Workshop"^^xsd:string .
+ :Lecture a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Lecture"^^xsd:string .
+ :Quiz a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Quiz"^^xsd:string .
+ :Drive-Volunteering a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Drive-Volunteering"^^xsd:string .
+ :Symposium a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Symposium"^^xsd:string .
+ :Competition a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Competition"^^xsd:string .
+ :Tournament a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Tournament"^^xsd:string .
+ :Open_House a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Open House"^^xsd:string .
+ :Cultural_Event a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Cultural Event"^^xsd:string .
+ :Performing_Arts a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Performing Arts"^^xsd:string .
+ :Institutional_Event a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Institutional Event"^^xsd:string .
+ :Departmental_Event a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Departmental Event"^^xsd:string .
+ :Other_Event a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Other Event"^^xsd:string .
+
+
+
+
+
+
+
+
+
