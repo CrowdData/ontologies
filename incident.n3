@@ -4,10 +4,12 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/prov/ns#> .
 
 : a owl:Ontology ;
     owl:imports <http://purl.org/NET/c4dm/event.owl>,
         <http://rdfs.org/sioc/ns#>,
+		<http://www.w3.org/prov/ns#>,
         <http://xmlns.com/foaf/0.1/> .
 
 :Active a :IncidentStatus,
@@ -53,6 +55,7 @@
 :Report a owl:Class ;
     rdfs:label "Report"^^xsd:string ;
     rdfs:comment "A report of an Incident"^^xsd:string ;
+	rdfs:subClassOf prov:Entity ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onDataRange xsd:dateTime ;
             owl:onProperty <http://rdfs.org/sioc/ns#created_at> ;
@@ -96,7 +99,8 @@
 :Incident a owl:Class ;
     rdfs:label "Incident"^^xsd:string ;
     rdfs:comment "An event or set of circumstances that has an impact on the smart district.  For example, this could be roadworks, a panther sighting, road closure"^^xsd:string ;
-    rdfs:subClassOf [ a owl:Restriction ;
+	rdfs:subClassOf prov:Entity ;
+   rdfs:subClassOf [ a owl:Restriction ;
             owl:onClass :IncidentType ;
             owl:onProperty :incidentType ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
@@ -113,8 +117,6 @@
             owl:onProperty <http://purl.org/NET/c4dm/event.owl#time> ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] .
 
-:email a owl:DatatypeProperty ;
-    rdfs:comment "The email address associated with the Agent that provided a report" .
 
 :hasStatus a owl:ObjectProperty ;
     rdfs:label "has status"^^xsd:string .
@@ -125,15 +127,6 @@
 .""".
 
 <http://purl.org/NET/c4dm/timeline.owl#Interval> a owl:Class .
-
-<http://xmlns.com/foaf/0.1/Agent> rdfs:subClassOf [ a owl:Restriction ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty :email ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty <http://xmlns.com/foaf/0.1/name> ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] .
 
 :IncidentStatus a owl:Class ;
     rdfs:label "incident status"^^xsd:string ;

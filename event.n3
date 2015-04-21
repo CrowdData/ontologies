@@ -6,17 +6,20 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix event: <http://purl.org/NET/c4dm/event.owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov: 	<http://www.w3.org/prov/ns#> .
 
 : a owl:Ontology ;
     owl:imports <http://purl.org/NET/c4dm/event.owl>,
         <http://rdfs.org/sioc/ns#>,
-        <http://xmlns.com/foaf/0.1/> .
+		<http://www.w3.org/prov/ns#>,
+        <http://purl.org/dc/terms/> .
 
 
 :IITBEvent a owl:Class;
     rdfs:label "Report"^^xsd:string ;
     rdfs:comment "A report of an Incident"^^xsd:string ;
     rdfs:subClassOf event:Event;
+	rdfs:subClassOf prov:Entity;
     rdfs:subClassOf
         [ a owl:Restriction ;
             owl:onClass <http://purl.org/NET/c4dm/timeline.owl#Interval> ;
@@ -38,18 +41,19 @@
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
             owl:onProperty dcterms:description ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] .
        
-            .
+            
         
         
         
 :more_info a owl:DatatypeProperty;
+        rdfs:domain :IITBEvent;
 	rdfs:label "Link to more information, registrations updates" .
 	
 	
 :hasTag a owl:DatatypeProperty ;
-    rdfs:domain IITBEvent;
+    rdfs:domain :IITBEvent;
     rdfs:range xsd:string;
     rdfs:comment "Additional Tag/Topic to describe event."^^xsd:string ;
     rdfs:label "Additional Tag/Topic to describe event."^^xsd:string  .
@@ -89,9 +93,9 @@ rdfs:comment "Type of event" .
  :Biosciences_and_Bioengineering_Dept._ a :Department,
         owl:NamedIndividual ;
 		rdfs:label "Biosciences and Bioengineering Dept. "^^xsd:string .
- :Chemical_Engineering_Dept._Related" a :Department,
+ :Chemical_Engineering_Dept._Related a :Department,
         owl:NamedIndividual ;
-		rdfs:label "Chemical Engineering Dept. Related""^^xsd:string .
+		rdfs:label "Chemical Engineering Dept. Related"^^xsd:string .
  :Civil_Engineering_Dept._Related a :Department,
         owl:NamedIndividual ;
 		rdfs:label "Civil Engineering Dept. Related"^^xsd:string .
@@ -201,7 +205,13 @@ rdfs:comment "Type of event" .
         owl:NamedIndividual ;
 		rdfs:label "Other Event"^^xsd:string .
 
-
+ :Technical_Event a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Technical Event"^^xsd:string .
+                
+ :Non_Technical_Event a :EventType,
+        owl:NamedIndividual ;
+		rdfs:label "Non Technical Event"^^xsd:string .
 
 
 

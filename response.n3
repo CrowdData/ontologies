@@ -1,0 +1,30 @@
+@prefix : <http://crowddata.abdn.ac.uk/def/response/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix cd: <http://crowddata.abdn.ac.uk/ontologies/cd/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+
+: a owl:Ontology ;
+    owl:imports  <http://rdfs.org/sioc/ns>,
+	  <http://www.w3.org/ns/prov>,
+        <http://purl.org/dc/terms/> .
+
+
+cd:Response a owl:Class;
+    rdfs:label "Response to cd:Question"^^xsd:string ;
+    rdfs:comment "Resonspe to cd:Question"^^xsd:string ;
+    rdfs:subClassOf sioc:Post ;
+    rdfs:subClassOf
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty sioc:content ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+		prov:Entity .
+
+
+		
+       

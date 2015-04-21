@@ -1,0 +1,30 @@
+@prefix : <http://crowddata.abdn.ac.uk/def/feedback/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix cd: <http://crowddata.abdn.ac.uk/ontologies/cd/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+: a owl:Ontology ;
+    owl:imports
+        <http://www.w3.org/ns/prov>,
+        <http://purl.org/dc/terms/> .
+
+
+		
+cd:Feedback a owl:Class;
+rdfs:label "Feedback"^^xsd:string ;
+rdfs:comment "Feedback provided about IITB Life app and website." ;
+ rdfs:subClassOf
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:dateTime ;
+            owl:onProperty <http://purl.org/dc/terms/date> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+		[ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty <http://purl.org/dc/terms/abstract> ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+			prov:Entity .
+				
