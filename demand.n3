@@ -24,7 +24,7 @@ rdfs:comment "Demand class constitutes information about demand on the bus stops
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
 		[ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty <http://purl.org/dc/terms/Location> ;
+            owl:onProperty :hasLocationLabel ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
 		[ a owl:Restriction ;
             owl:onDataRange xsd:string ;

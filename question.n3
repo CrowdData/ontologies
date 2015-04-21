@@ -23,10 +23,5 @@ cd:Question a owl:Class;
             owl:onDataRange xsd:string ;
             owl:onProperty sioc:content ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-     
-        [ a owl:Restriction ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty dcterms:description ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
 		prov:Entity .
        

@@ -5,12 +5,15 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix prov: <http://www.w3.org/prov/ns#> .
+@prefix time: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 
 : a owl:Ontology ;
     owl:imports <http://purl.org/NET/c4dm/event.owl>,
+    <http://purl.org/dc/terms/> ,
+    <http://purl.org/NET/c4dm/timeline.owl>,
         <http://rdfs.org/sioc/ns#>,
-		<http://www.w3.org/prov/ns#>,
-        <http://xmlns.com/foaf/0.1/> .
+		<http://www.w3.org/prov/ns#> .
 
 :Active a :IncidentStatus,
         owl:NamedIndividual ;
@@ -113,7 +116,7 @@
             owl:onProperty <http://purl.org/NET/c4dm/event.owl#place> ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass <http://purl.org/NET/c4dm/timeline.owl#Interval> ;
+            owl:onClass time:Interval ;
             owl:onProperty <http://purl.org/NET/c4dm/event.owl#time> ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] .
 
@@ -126,7 +129,6 @@
     rdfs:comment """The type of an incident
 .""".
 
-<http://purl.org/NET/c4dm/timeline.owl#Interval> a owl:Class .
 
 :IncidentStatus a owl:Class ;
     rdfs:label "incident status"^^xsd:string ;
